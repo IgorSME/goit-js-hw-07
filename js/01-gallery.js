@@ -30,14 +30,17 @@ function onGetLargeImage(e) {
     e.preventDefault();
     const instance = basicLightbox.create(`
     <img src="${e.target.dataset.source}" width="800" height="600">
-`);
-
-    instance.show();
-    document.addEventListener("keydown", e => {
+`, {
+    onShow: (instance) => {
+        document.addEventListener("keydown", e => {
         if (e.key === "Escape") {
             instance.close()
         }
-    });
+    })
+    }
+});
+
+    instance.show();
     
 }
 
