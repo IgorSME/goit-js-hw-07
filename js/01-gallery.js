@@ -32,15 +32,18 @@ function onGetLargeImage(e) {
     <img src="${e.target.dataset.source}" width="800" height="600">
 `, {
     onShow: (instance) => {
-        document.addEventListener("keydown", e => {
-        if (e.key === "Escape") {
-            instance.close()
-        }
-    })
+        document.addEventListener("keydown", onCloseModalWithEscape)
     }
 });
 
     instance.show();
+
+    function onCloseModalWithEscape (e) {
+        if (e.key === "Escape") {
+            instance.close();
+            document.removeEventListener("keydown", onCloseModalWithEscape)
+        }
+    }
     
 }
 
